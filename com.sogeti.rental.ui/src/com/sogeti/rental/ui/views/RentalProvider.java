@@ -2,16 +2,23 @@ package com.sogeti.rental.ui.views;
 
 import java.util.Collection;
 
+import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 
 import com.opcoach.training.rental.Customer;
+import com.opcoach.training.rental.Rental;
 import com.opcoach.training.rental.RentalAgency;
 import com.opcoach.training.rental.RentalObject;
+import com.sogeti.rental.ui.RentalActivator;
 import com.sogeti.rental.ui.RentalUIConstants;
 
-public class RentalProvider extends LabelProvider implements ITreeContentProvider, RentalUIConstants
+public class RentalProvider extends LabelProvider implements ITreeContentProvider, RentalUIConstants, IColorProvider
 {
 
 
@@ -63,6 +70,43 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 			return ((RentalObject) element).getName();
 		
 		return super.getText(element); // call toString
+	}
+
+	@Override
+	public Color getForeground(Object element) {
+		if (element instanceof Customer)
+			return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_BLUE);
+		else if (element instanceof RentalAgency)
+			return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_MAGENTA);
+		else if (element instanceof RentalObject)
+			return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_YELLOW);
+		else if (element instanceof Rental)
+			return Display.getCurrent().getSystemColor(SWT.COLOR_CYAN);
+		
+		return null;
+	}
+
+	@Override
+	public Color getBackground(Object element) {
+		if (element instanceof RentalAgency)
+			return Display.getCurrent().getSystemColor(SWT.COLOR_GREEN);
+		
+		return null;
+	}
+	
+
+	@Override
+	public Image getImage(Object element) {
+		if (element instanceof RentalAgency)
+			return RentalActivator.getDefault().getImageRegistry().get(ICON_AGENCY);
+		else if (element instanceof Customer)
+			return RentalActivator.getDefault().getImageRegistry().get(ICON_CUSTOMER);
+		else if (element instanceof RentalObject)
+			return RentalActivator.getDefault().getImageRegistry().get(ICON_RENTALOBJECTS);
+		else if (element instanceof Rental)
+			return RentalActivator.getDefault().getImageRegistry().get(ICON_RENTALS);
+		
+		return null;
 	}
 }
 

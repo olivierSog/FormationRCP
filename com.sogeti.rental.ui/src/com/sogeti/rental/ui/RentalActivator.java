@@ -1,23 +1,27 @@
 package com.sogeti.rental.ui;
 
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.FrameworkUtil;
 
 /**
  * The activator class controls the plug-in life cycle
  */
-public class Activator extends AbstractUIPlugin {
+public class RentalActivator extends AbstractUIPlugin implements RentalUIConstants{
 
 	// The plug-in ID
 	public static final String PLUGIN_ID = "com.sogeti.rental.ui"; //$NON-NLS-1$
 
 	// The shared instance
-	private static Activator plugin;
+	private static RentalActivator plugin;
 	
 	/**
 	 * The constructor
 	 */
-	public Activator() {
+	public RentalActivator() {
 	}
 
 	/*
@@ -43,8 +47,18 @@ public class Activator extends AbstractUIPlugin {
 	 *
 	 * @return the shared instance
 	 */
-	public static Activator getDefault() {
+	public static RentalActivator getDefault() {
 		return plugin;
 	}
 
+	
+	protected void initializeImageRegistry(ImageRegistry reg) {
+		Bundle b = FrameworkUtil.getBundle(getClass());
+		
+		reg.put(ICON_CUSTOMER, ImageDescriptor.createFromURL(b.getEntry(ICON_CUSTOMER)));
+		reg.put(ICON_AGENCY, ImageDescriptor.createFromURL(b.getEntry(ICON_AGENCY)));
+		reg.put(ICON_RENTALS, ImageDescriptor.createFromURL(b.getEntry(ICON_RENTALS)));
+		reg.put(ICON_RENTALOBJECTS, ImageDescriptor.createFromURL(b.getEntry(ICON_RENTALOBJECTS)));
+	}
+	
 }

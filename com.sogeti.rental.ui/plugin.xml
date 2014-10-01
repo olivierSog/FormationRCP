@@ -17,10 +17,19 @@
       <view
             category="com.sogeti.rental.ui.category"
             class="com.sogeti.rental.ui.views.RentalAgencyView"
+            icon="/"
             id="com.sogeti.rental.ui.rentalAgency"
             name="RentalAgency"
             restorable="true">
       </view>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectives">
+      <perspective
+            class="com.sogeti.rental.ui.perspectives.RentalPerspective"
+            id="com.sogeti.rental.ui.perspectives.RentalPerspective"
+            name="Rental">
+      </perspective>
    </extension>
 
 </plugin>

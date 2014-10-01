@@ -26,6 +26,9 @@ public class RentalAgencyView extends ViewPart {
 		Collection<RentalAgency> agencies = new ArrayList<RentalAgency>();
 		agencies.add(RentalCoreActivator.getAgency());
 		tv.setInput(agencies);
+		
+		// Push Tree Viewer
+		getSite().setSelectionProvider(tv);
 	}
 
 	@Override
@@ -34,4 +37,5 @@ public class RentalAgencyView extends ViewPart {
 
 	}
 
+	
 }
