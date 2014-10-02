@@ -17,7 +17,7 @@
       <view
             category="com.sogeti.rental.ui.category"
             class="com.sogeti.rental.ui.views.RentalAgencyView"
-            icon="/"
+            icon="icons/Agency.png"
             id="com.sogeti.rental.ui.rentalAgency"
             name="RentalAgency"
             restorable="true">
@@ -44,6 +44,43 @@
             id="com.sogeti.rental.ui.rentalcolor"
             name="Rental Color">
       </page>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            defaultHandler="com.sogeti.rental.ui.handlers.SampleHandler"
+            id="com.sogeti.rental.ui.rentalcommand"
+            name="Rental Command">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.menus">
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.main.menu?after=additions">
+         <command
+               commandId="com.sogeti.rental.ui.rentalcommand"
+               label="ma commande"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="menu:org.eclipse.ui.views.ResourceNavigator?after=additions">
+         <command
+               commandId="com.sogeti.rental.ui.rentalcommand"
+               style="push">
+         </command>
+      </menuContribution>
+      <menuContribution
+            allPopups="false"
+            locationURI="popup:com.sogeti.rental.ui.rentalAgency?after=additions">
+         <command
+               commandId="com.sogeti.rental.ui.rentalcommand"
+               label="my cmd"
+               style="push">
+         </command>
+      </menuContribution>
    </extension>
 
 </plugin>

@@ -7,6 +7,6 @@ Bundle-Activator: com.sogeti.rental.ui.RentalActivator
 Bundle-Vendor: SOGETI
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
- com.sogeti.rental.core;bundle-version="1.0.0"
+ com.sogeti.rental.core;bundle-version="1.0.0";visibility:=reexport
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
