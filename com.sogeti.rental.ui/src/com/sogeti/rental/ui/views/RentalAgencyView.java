@@ -3,22 +3,44 @@ package com.sogeti.rental.ui.views;
 import java.util.ArrayList;
 import java.util.Collection;
 
+import org.eclipse.jface.util.IPropertyChangeListener;
+import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IViewSite;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.part.ViewPart;
 
 import com.opcoach.training.rental.RentalAgency;
 import com.sogeti.rental.core.RentalCoreActivator;
+import com.sogeti.rental.ui.RentalActivator;
 
-public class RentalAgencyView extends ViewPart {
+public class RentalAgencyView extends ViewPart implements IPropertyChangeListener {
 
+	private TreeViewer tv;
+
+	@Override
+	public void init(IViewSite site) throws PartInitException {
+		// TODO Auto-generated method stub
+		super.init(site);
+		RentalActivator.getDefault().getPreferenceStore().addPropertyChangeListener(this);
+		
+	}
+	
+	@Override
+	public void dispose() {
+		RentalActivator.getDefault().getPreferenceStore().removePropertyChangeListener(this);
+		super.dispose();
+	}
+	
+	
 	public RentalAgencyView() {
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
 	public void createPartControl(Composite parent) {
-		TreeViewer tv = new TreeViewer(parent);
+		tv = new TreeViewer(parent);
 		RentalProvider provider = new RentalProvider();
 		tv.setContentProvider(provider);
 		tv.setLabelProvider(provider);
@@ -35,6 +57,12 @@ public class RentalAgencyView extends ViewPart {
 	public void setFocus() {
 		// TODO Auto-generated method stub
 
+	}
+
+	@Override
+	public void propertyChange(PropertyChangeEvent event) {
+		tv.refresh();
+		
 	}
 
 	

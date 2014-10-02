@@ -10,4 +10,8 @@ public interface RentalUIConstants {
 	public static final String ICON_AGENCY = "icons/Agency.png";
 	public static final String ICON_RENTALS = "icons/Rentals.png";
 	public static final String ICON_RENTALOBJECTS = "icons/RentalObjects.png";
+	
+	public static final String PREF_CUSTOMER_COLOR = "PREF_CUSTOMER_COLOR";
+	public static final String PREF_RENTALS_COLOR = "PREF_RENTALS_COLOR";
+	public static final String PREF_AGENCY_COLOR = "PREF_AGENCY_COLOR";
 }

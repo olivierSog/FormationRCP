@@ -2,6 +2,9 @@ package com.sogeti.rental.ui.views;
 
 import java.util.Collection;
 
+import org.eclipse.jface.resource.ColorRegistry;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.resource.StringConverter;
 import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -75,17 +78,35 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 	@Override
 	public Color getForeground(Object element) {
 		if (element instanceof Customer)
-			return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_BLUE);
+			
+			return getAColor(RentalActivator.getDefault().getPreferenceStore().getString(PREF_CUSTOMER_COLOR));
+		
+			//return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_BLUE);
 		else if (element instanceof RentalAgency)
 			return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_MAGENTA);
 		else if (element instanceof RentalObject)
-			return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_YELLOW);
+			//return Display.getCurrent().getSystemColor(SWT.COLOR_DARK_YELLOW);
+			return getAColor(RentalActivator.getDefault().getPreferenceStore().getString(PREF_AGENCY_COLOR));
 		else if (element instanceof Rental)
-			return Display.getCurrent().getSystemColor(SWT.COLOR_CYAN);
+			//return Display.getCurrent().getSystemColor(SWT.COLOR_CYAN);
+			return getAColor(RentalActivator.getDefault().getPreferenceStore().getString(PREF_RENTALS_COLOR));
 		
 		return null;
 	}
 
+	private Color getAColor(String rgbKey) {
+		// p81
+		ColorRegistry colorRegistry = JFaceResources.getColorRegistry();
+		
+		Color col = colorRegistry.get(rgbKey);
+		if (col == null)
+		{
+			colorRegistry.put(rgbKey, StringConverter.asRGB(rgbKey));
+			col = colorRegistry.get(rgbKey);
+		}
+		return col;
+	}
+	
 	@Override
 	public Color getBackground(Object element) {
 		if (element instanceof RentalAgency)
@@ -116,6 +137,36 @@ class Node implements RentalUIConstants
 {
 
 	private String label;
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((a == null) ? 0 : a.hashCode());
+		result = prime * result + ((label == null) ? 0 : label.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Node other = (Node) obj;
+		if (a == null) {
+			if (other.a != null)
+				return false;
+		} else if (!a.equals(other.a))
+			return false;
+		if (label == null) {
+			if (other.label != null)
+				return false;
+		} else if (!label.equals(other.label))
+			return false;
+		return true;
+	}
+
 	private RentalAgency a;
 	
 	public String getLabel() {
