@@ -22,6 +22,12 @@
             name="RentalAgency"
             restorable="true">
       </view>
+      <view
+            class="com.sogeti.rental.ui.views.RentalCustomerView"
+            id="com.sogeti.rental.ui.rentalCustomer"
+            name="rentalCustomer"
+            restorable="true">
+      </view>
    </extension>
    <extension
          point="org.eclipse.ui.perspectives">
