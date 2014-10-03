@@ -16,5 +16,7 @@ public interface RentalUIConstants {
 	public static final String PREF_AGENCY_COLOR = "PREF_AGENCY_COLOR";
 	
 	public static final String PREF_PALETTE = "PREF_PALETTE";
+	
+//	public static final String PERSPECTIVE_ID = "com.sogeti.rental.ui.perspectives.RentalPerspective";
 
 }
