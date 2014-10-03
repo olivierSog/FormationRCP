@@ -1,5 +1,8 @@
 package com.sogeti.rental.ui;
 
+import org.eclipse.core.runtime.IConfigurationElement;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -31,6 +34,20 @@ public class RentalActivator extends AbstractUIPlugin implements RentalUIConstan
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		
+		readViewsExtensions();
+	}
+
+	private void readViewsExtensions() {
+		// Direct access
+		IExtensionRegistry reg = Platform.getExtensionRegistry();
+		for (IConfigurationElement e : reg.getConfigurationElementsFor("org.eclipse.ui.views"))
+		{
+//			System.out.println("Found this element : " + e.getName());
+			if (e.getName().equals("view"))
+				System.out.println("Plugin : " + e.getNamespaceIdentifier() + "\t\tVue : " + e.getAttribute("name"));
+		}
+		
 	}
 
 	/*
