@@ -18,6 +18,7 @@ import com.opcoach.training.rental.Customer;
 import com.opcoach.training.rental.Rental;
 import com.opcoach.training.rental.RentalAgency;
 import com.opcoach.training.rental.RentalObject;
+import com.sogeti.rental.ui.PaletteDescriptor;
 import com.sogeti.rental.ui.RentalActivator;
 import com.sogeti.rental.ui.RentalUIConstants;
 
@@ -77,6 +78,14 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 
 	@Override
 	public Color getForeground(Object element) {
+		
+		String pid = RentalActivator.getDefault().getPreferenceStore().getString(PREF_PALETTE);
+		
+		PaletteDescriptor p = RentalActivator.getDefault().getPaletteManager().get(pid);
+		
+		return p.getCp().getForeground(element);
+
+/*		
 		if (element instanceof Customer)
 			
 			return getAColor(RentalActivator.getDefault().getPreferenceStore().getString(PREF_CUSTOMER_COLOR));
@@ -92,6 +101,7 @@ public class RentalProvider extends LabelProvider implements ITreeContentProvide
 			return getAColor(RentalActivator.getDefault().getPreferenceStore().getString(PREF_RENTALS_COLOR));
 		
 		return null;
+*/
 	}
 
 	private Color getAColor(String rgbKey) {

@@ -1,10 +1,15 @@
 package com.sogeti.rental.ui;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.jface.viewers.IColorProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -21,6 +26,18 @@ public class RentalActivator extends AbstractUIPlugin implements RentalUIConstan
 	// The shared instance
 	private static RentalActivator plugin;
 	
+	// Map of possible color providers (read in extensions)
+	private Map<String, PaletteDescriptor> paletteManager = new HashMap<String, PaletteDescriptor>();
+	
+	
+	public Map<String, PaletteDescriptor> getPaletteManager() {
+		return paletteManager;
+	}
+
+	public void setPaletteManager(Map<String, PaletteDescriptor> paletteManager) {
+		this.paletteManager = paletteManager;
+	}
+
 	/**
 	 * The constructor
 	 */
@@ -36,6 +53,8 @@ public class RentalActivator extends AbstractUIPlugin implements RentalUIConstan
 		plugin = this;
 		
 		readViewsExtensions();
+		
+		readPalette();
 	}
 
 	private void readViewsExtensions() {
@@ -50,6 +69,25 @@ public class RentalActivator extends AbstractUIPlugin implements RentalUIConstan
 		
 	}
 
+	private void readPalette() {
+		// lit toutes les palettes
+		IExtensionRegistry reg = Platform.getExtensionRegistry();
+		try {
+			for (IConfigurationElement e : reg.getConfigurationElementsFor("com.sogeti.rental.ui.palette"))
+			{
+				PaletteDescriptor p = new PaletteDescriptor();
+				p.setName(e.getAttribute("name"));
+				p.setId(e.getAttribute("id"));
+				p.setCp((IColorProvider)e.createExecutableExtension("class"));
+				
+				paletteManager.put(e.getAttribute("id"), p);
+			}
+		} catch (CoreException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+	}
+	
 	/*
 	 * (non-Javadoc)
 	 * @see org.eclipse.ui.plugin.AbstractUIPlugin#stop(org.osgi.framework.BundleContext)
@@ -78,4 +116,5 @@ public class RentalActivator extends AbstractUIPlugin implements RentalUIConstan
 		reg.put(ICON_RENTALOBJECTS, ImageDescriptor.createFromURL(b.getEntry(ICON_RENTALOBJECTS)));
 	}
 	
+
 }

@@ -27,6 +27,9 @@ public class RentalDefaultColor extends AbstractPreferenceInitializer implements
 		store.setDefault(PREF_CUSTOMER_COLOR, StringConverter.asString(c.getRGB()));
 		store.setDefault(PREF_RENTALS_COLOR, StringConverter.asString(new RGB(255, 0, 0)));
 		store.setDefault(PREF_AGENCY_COLOR, StringConverter.asString(new RGB(255, 0, 0)));
+		
+		// Initialize the store
+		store.setDefault(PREF_PALETTE, "com.sogeti.rental.ui.palette.DefaultPalette");
 	}
 
 }
