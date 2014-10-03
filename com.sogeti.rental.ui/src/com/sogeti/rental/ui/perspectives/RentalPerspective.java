@@ -9,14 +9,15 @@ public class RentalPerspective implements IPerspectiveFactory {
 	 * Creates the initial layout for a page.
 	 */
 	public void createInitialLayout(IPageLayout layout) {
+		// Allow to allow the views in the perspective
 		layout.setEditorAreaVisible(false);
 		String editorArea = layout.getEditorArea();
 		addFastViews(layout);
 		addViewShortcuts(layout);
 		addPerspectiveShortcuts(layout);
 		layout.addView("com.sogeti.rental.ui.rentalPropertyView", IPageLayout.TOP, 0.5f, IPageLayout.ID_EDITOR_AREA);
-		layout.addView("com.sogeti.rental.ui.rentalAgency", IPageLayout.BOTTOM, 0.2f, "com.sogeti.rental.ui.rentalPropertyView");
-		layout.addView("com.sogeti.rental.ui.rentalCustomer", IPageLayout.RIGHT, 0.5f, "com.sogeti.rental.ui.rentalAgency");
+		layout.addView("com.sogeti.rental.ui.rentalAgencyView", IPageLayout.BOTTOM, 0.2f, "com.sogeti.rental.ui.rentalPropertyView");
+		layout.addView("com.sogeti.rental.ui.rentalCustomer", IPageLayout.RIGHT, 0.5f, "com.sogeti.rental.ui.rentalAgencyView");
 	}
 
 	/**

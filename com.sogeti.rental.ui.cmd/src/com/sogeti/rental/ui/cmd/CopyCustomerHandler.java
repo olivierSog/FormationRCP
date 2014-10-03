@@ -36,35 +36,31 @@ public class CopyCustomerHandler extends AbstractHandler {
 	 */
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 
-		// System.out.println("toto");
-		IWorkbenchWindow window = HandlerUtil
-				.getActiveWorkbenchWindowChecked(event);
-		MessageDialog.openInformation(window.getShell(),
-				"com.sogeti.rental.ui", "Copy Customer");
+		IWorkbenchWindow window = HandlerUtil.getActiveWorkbenchWindowChecked(event);
+		// Little Dialog
+		MessageDialog.openInformation(window.getShell(), "com.sogeti.rental.ui", "Copy Customer");
 
 		ISelection currentSelection = HandlerUtil.getCurrentSelection(event);
-		if (currentSelection instanceof IStructuredSelection) {
-			Object o = ((IStructuredSelection) currentSelection)
-					.getFirstElement();
-			if (o instanceof Customer) {
-
+		if (currentSelection instanceof IStructuredSelection)
+		{
+			Object o = ((IStructuredSelection) currentSelection).getFirstElement();
+			if (o instanceof Customer)
+			{
 				Customer c = (Customer) o;
+				
+				// 
 				Clipboard clipboard = new Clipboard(Display.getCurrent());
 				String textData = c.getDisplayName();
 				String rtfData = "{\\rtf1\\b\\i " + textData + "}";
 				TextTransfer textTransfer = TextTransfer.getInstance();
 				RTFTransfer rtfTransfer = RTFTransfer.getInstance();
-				Transfer[] transfers = new Transfer[] { textTransfer,
-						rtfTransfer };
+				Transfer[] transfers = new Transfer[] { textTransfer, rtfTransfer };
 				Object[] data = new Object[] { textData, rtfData };
 				clipboard.setContents(data, transfers, DND.CLIPBOARD);
 				clipboard.dispose();
 			}
 		}
-
-		/*		
 		
-*/
 		return null;
 	}
 }

@@ -32,7 +32,7 @@
          point="org.eclipse.ui.menus">
       <menuContribution
             allPopups="false"
-            locationURI="popup:com.sogeti.rental.ui.rentalAgency?after=additions">
+            locationURI="popup:com.sogeti.rental.ui.rentalAgencyView?after=additions">
          <command
                commandId="org.eclipse.ui.edit.copy"
                label="Copy Customer"

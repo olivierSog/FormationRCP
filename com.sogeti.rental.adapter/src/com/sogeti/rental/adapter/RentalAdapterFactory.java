@@ -10,8 +10,9 @@ public class RentalAdapterFactory implements IAdapterFactory {
 	@Override
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 
+		// Adapter Dynamic
 		if ((adaptableObject instanceof Rental ) && adapterType == Customer.class)
-		return  ((Rental)adaptableObject).getCustomer();
+			return  ((Rental)adaptableObject).getCustomer();
 		
 		return null;
 	}

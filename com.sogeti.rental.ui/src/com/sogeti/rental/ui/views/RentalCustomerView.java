@@ -28,13 +28,12 @@ public class RentalCustomerView extends ViewPart implements ISelectionListener {
 
 	@Override
 	public void createPartControl(Composite parent) {
-
+		// Allow view creation
 		lblCustomer = new Label(parent, SWT.NONE);
-		lblCustomer.setText("un texwte bidion........");
+		lblCustomer.setText("un texte bidon........");  // to initialize
 		// lblCustomer.setText("exo 055");
 
 		// setCustomer(RentalCoreActivator.getAgency().getCustomers().get(1));
-
 	}
 
 	@Override
@@ -45,7 +44,6 @@ public class RentalCustomerView extends ViewPart implements ISelectionListener {
 
 	@Override
 	public void init(IViewSite site) throws PartInitException {
-		// TODO Auto-generated method stub
 		super.init(site);
 		site.getPage().addSelectionListener(this);
 	}
@@ -62,16 +60,15 @@ public class RentalCustomerView extends ViewPart implements ISelectionListener {
 		if (selection.isEmpty())
 			return;
 
-		if (selection instanceof IStructuredSelection) {
-			Object selected = ((IStructuredSelection) selection)
-					.getFirstElement();
+		if (selection instanceof IStructuredSelection)
+		{
+			Object selected = ((IStructuredSelection) selection).getFirstElement();
 
 			/*
 			 * if (selected instanceof Rental) { setRental((Rental)selected); }
 			 * System.out.println("Object selection : " + selected);
 			 */
-			Customer c = (Customer) Platform.getAdapterManager().getAdapter(
-					selected, Customer.class);
+			Customer c = (Customer) Platform.getAdapterManager().getAdapter(selected, Customer.class);
 
 			if (c != null)
 				setCustomer(c);

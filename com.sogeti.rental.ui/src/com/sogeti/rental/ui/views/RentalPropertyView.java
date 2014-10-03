@@ -47,7 +47,7 @@ public class RentalPropertyView extends ViewPart implements ISelectionListener{
 
 	@Override
 	public void createPartControl(Composite parent) {
-		// TODO Auto-generated method stub
+		// Allow to create the view
 		parent.setLayout(new GridLayout(2, false));
 		
 		Group infoGroup = new Group(parent, SWT.NONE);

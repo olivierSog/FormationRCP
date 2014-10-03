@@ -18,7 +18,7 @@
             category="com.sogeti.rental.ui.category"
             class="com.sogeti.rental.ui.views.RentalAgencyView"
             icon="icons/Agency.png"
-            id="com.sogeti.rental.ui.rentalAgency"
+            id="com.sogeti.rental.ui.rentalAgencyView"
             name="RentalAgency"
             restorable="true">
       </view>
@@ -80,7 +80,7 @@
       </menuContribution>
       <menuContribution
             allPopups="false"
-            locationURI="popup:com.sogeti.rental.ui.rentalAgency?after=additions">
+            locationURI="popup:com.sogeti.rental.ui.rentalAgencyView?after=additions">
          <command
                commandId="com.sogeti.rental.ui.rentalcommand"
                label="my cmd"
